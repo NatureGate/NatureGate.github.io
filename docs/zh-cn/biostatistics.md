@@ -76,7 +76,7 @@
 
    抛一枚硬币，有两种可能，要么正面向上，要么反面向上。这是一个简单的伯努利实验。
 
-   假设我们模拟15次伯努利实验，第一个参数为我们想要观察的实验次数，prob为正面向上的概率，size=1表示每个单独的实验只包括一次抛硬币
+   假设我们模拟15次伯努利实验，第一个参数为我们想要观察的实验次数，硬币为正面向上的概率，size=1表示每个单独的实验只包括一次抛硬币
 
    `rbinom(15,size = 1,prob = 0.5)`
    
@@ -114,6 +114,45 @@
    ![alt](./picture/chapter1_binom.png)
    
    输出$X$属于二项分布$X\sim B(n,p)$
+   
+   
+   
+   **泊松分布**
+   
+   当二项分布中的试验次数n比较大，事件A在一次试验中发生的概率p比较小时，二项分布的一个事件发生次数的概率可以用泊松分布的概率来模拟。二项分布$B(n,p)$可以近似为泊松分布$(\lambda=np)$,与二项分布不同，泊松分布不再依赖于两个单独的参数$n$和$p$，而是$np$。
+   $$
+   \begin{aligned} 
+   &\lim\limits_{n\to \infty,p\to0}\binom{n}{k}p^k(1-p)^{n-k} \\
+    
+   & =\lim\limits_{n\to \infty,p\to0}\frac{n^k}{k!}p^k(1-p)^{\frac{\lambda}{p}-k}\\
+   &=\lim\limits_{n\to \infty,p\to0}\frac{\lambda^k}{k!}[(1-p)^{\frac{1}{-p}}]^{-\lambda}\frac{1}{(1-p)^k}\\
+   &=\lim\limits_{n\to \infty,p\to0}\frac{\lambda^k}{k!}e^{-\lambda}
+   \end{aligned}
+   $$
+   
+   $$
+   P(X=k)=\frac{\lambda^ke^{-\lambda}}{k!}
+   $$
+   计算$\lambda=5$时$P(X=3)$
+   
+   `5^3 * exp(-5) / factorial(3)`
+   
+   `0.1403739`
+   
+   假设现在有10000个位点的核酸序列，突变率为$5$x$10^{-4}$，计算出突变的核酸数目。
+   
+   画出概率分布条形图
+   
+   `rbinom(1,prob = 5e-4,size = 10000)`
+   
+   `6`
+   
+   `simulations = rbinom(n = 30000,prob = 5e-4,size = 10000)
+   barplot(table(simulations),col = "lavender")`
+   
+   ![alt](./picture/task_poisson.png)
+   
+   
    
    
    
