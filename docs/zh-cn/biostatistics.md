@@ -111,7 +111,7 @@
    `probabilities = dbinom(0:20,prob = 0.7,size = 20)
    barplot(probabilities,names.arg = 0:20,col = "red")`
    
-   ![alt](E:\OurResearch\NatureGate.github.io\docs\zh-cn\picture\chapter1_binom.png)
+   ![alt](./picture/chapter1_binom.png)
    
    输出$X$属于二项分布$X\sim B(n,p)$
    
