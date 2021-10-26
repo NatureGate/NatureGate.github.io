@@ -1,4 +1,4 @@
-# 一天搞定numpy
+## 一天搞定numpy
 **一门语言的流行，必要条件就是有杀手级别的框架和库。**
 
 [numpy](https://numpy.org/)
@@ -375,3 +375,6 @@ print(A.shape,B.shape)
 C = A+B
 print(C)
 ```
+## 两天搞定pandas
+## 三天搞定pytorch
+## 一周搞定机器学习
