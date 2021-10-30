@@ -376,5 +376,269 @@ C = A+B
 print(C)
 ```
 ## 两天搞定pandas
+
+pandas 是一个[Python](https://www.python.org/)包，提供快速、灵活和富有表现力的数据结构，使数据处理变得既简单又直观。
+
+pandas主要包含两个数据结构DataFrame和Series
+
+| Dimensions | Name      | Description                                                  |
+| ---------- | --------- | ------------------------------------------------------------ |
+| 1          | Series    | 1D homogeneousy-typed array                                  |
+| 2          | DataFrame | General 2D labeled,size-mutable tabular structure with potentially heterogeneously-typed column |
+
+
+
+### pandas处理什么样的数据
+
+`import pandas as pd`
+
+![alt](./picture/longrui/pandas/dataframe.png)
+
+DataFrame的数据结构很像sql的一张表
+
+**创建一个DataFrame**
+
+```python
+df = pd.DataFrame(
+   ...:     {
+   ...:         "Name": [
+   ...:             "Braund, Mr. Owen Harris",
+   ...:             "Allen, Mr. William Henry",
+   ...:             "Bonnell, Miss. Elizabeth",
+   ...:         ],
+   ...:         "Age": [22, 35, 58],
+   ...:         "Sex": ["male", "male", "female"],
+   ...:     }
+   ...: )
+   ...: 
+        
+```
+
+`df`
+
+```
+ Name  Age     Sex
+0   Braund, Mr. Owen Harris   22    male
+1  Allen, Mr. William Henry   35    male
+2  Bonnell, Miss. Elizabeth   58  female
+```
+
+df的每一列都是一个Series，前面说过Series是一维的
+
+`df['Age']`
+
+`0    22
+1    35
+2    58
+Name: Age, dtype: int64`
+
+`ages = pd.Series(data=[22,35,58],name = 'Age')`
+
+我们看一看pandas的构造器
+
+``
+
+```
+def __init__(
+    self,
+    data=None,
+    index: Optional[Axes] = None,
+    columns: Optional[Axes] = None,
+    dtype: Optional[Dtype] = None,
+    copy: bool = False,
+)
+```
+
+可以看出pandas有几个关键的参数：data，index，columns，dtype，copy
+
+分别看看这几个参数的解释：
+
+```
+data : ndarray (structured or homogeneous), Iterable, dict, or DataFrame
+    Dict can contain Series, arrays, constants, or list-like objects.
+index : Index or array-like
+    Index to use for resulting frame. Will default to RangeIndex if
+    no indexing information part of input data and no index provided.
+columns : Index or array-like
+    Column labels to use for resulting frame. Will default to
+    RangeIndex (0, 1, 2, ..., n) if no column labels are provided.
+dtype : dtype, default None
+    Data type to force. Only a single dtype is allowed. If None, infer.
+copy : bool, default False
+    Copy data from inputs. Only affects DataFrame / 2d ndarray input.
+```
+
+一个小小的练习
+
+```python
+data={'name':['zhanghua','liuting','gaofei','hedong'],'age':[40,45,50,46],'addr':['jianxi','pudong','beijing','xian']}
+
+d2=DataFrame(data)
+#改变列的次序
+d3=DataFrame(data,columns=['name','age','addr'],index=['a','b','c','d'])
+d3
+```
+
+       name  age     addr
+```python
+a  zhanghua   40   jianxi
+b   liuting   45   pudong
+c    gaofei   50  beijing
+d    hedong   46     xian
+```
+
+**获取数据**
+
+`d3[['name']]` #选取某一列
+
+`d3[['name','age']]`#选取多列
+
+`d3[1:3]` #选取多行
+
+`d3['a':'c']` #选取多行
+
+```python
+data = [[1,2,3],[4,5,6],[7,8,9]]
+
+index = ['a','b','c']
+
+columns = ['c1','c2','c3']
+
+df = pd.DataFrame(data=data,index = index ,columns = columns)
+```
+
+使用obj.loc[]或者obj.iloc[]获取行或者列数据
+
+loc通过行标签获取行数据，iloc通过行号获取行数据
+
+loc在index的标签上进行索引，范围包括start和end
+
+iloc在index的位置上进行索引，不包括end
+
+```python
+#############loc的使用###############
+
+df.loc[['a','b']]       #通过行标签获取行数据
+
+df.loc[['a'],['c1','c3']]   #通过行标签、列名称获取行列数据
+
+df.loc[['a','b'],['c1','c3']] #通过行标签、列名称获取行列数据
+
+################iloc的使用###################
+
+df.iloc[1]           #通过行号获取行数据
+
+df.iloc[0:2]          #通过行号获取行数据，不包括索引2的值
+
+df.iloc[1:,1]         ##通过行号、列行获取行、列数据
+
+df.iloc[1:,[1,2]]       ##通过行号、列行获取行、列数据
+
+df.iloc[1:,1:3]        ##通过行号、列行获取行、列数据
+```
+
+**修改数据**
+
+```python
+data={'name':['zhanghua','liuting','gaofei','hedong'],'age':[40,45,50,46],'addr':['jianxi','pudong','beijing','xian']}
+
+d3=DataFrame(data,columns=['name','age','addr'],index=['a','b','c','d'])
+
+d3
+```
+
+`d3.drop('d',axis=0)`
+
+drop并不会修改原df的值
+
+
+
+
+
+求最大年龄
+
+`df['Age'].max()`
+
+`58`
+
+或者对于Series，直接
+
+`ages.max()`
+
+`58`
+
+假如我们对统计感兴趣
+
+`df.describe()`
+
+`                       Age
+count   3.000000
+mean   38.333333
+std    18.230012
+min    22.000000
+25%    28.500000
+50%    35.000000
+75%    46.500000
+max    58.000000`             
+
+pandas 读写数据
+
+![alt](./picture/longrui/pandas/pandas_table.png)
+
+
+
+**如何从DataFrame中过滤出指定列**
+
+![alt](./picture/longrui/pandas/pandas_subcolumn.png)
+
+`
+
+```python
+ages = titanic["Age"]
+
+ages.head()
+
+type(titanic["Age"])
+
+pandas.core.series.Series
+```
+
+`titanic["Age"].shape`
+
+`age_sex = titanic[["Age","Sex"]]`
+
+```python
+type(titanic[["Age","Sex"]])
+
+pandas.core.frame.DataFrame
+```
+
+可以看出age_sex是一个DataFrame
+
+**如何从DataFrame中过滤出特定的行？**
+
+![alt](./picture/longrui/pandas/pandas_row.png)
+
+选择年龄大于35的人
+
+```python
+above_35 = titanic[titanic["Age"]>35]
+
+above_35.head()
+```
+
+查看二号仓和三号仓的人
+
+```python
+class_23 = titanic[titanic["Pclass"].isin([2,3])]
+
+class_23.head()
+
+class_23.shape
+```
+
+
+
 ## 三天搞定pytorch
+
 ## 一周搞定机器学习
