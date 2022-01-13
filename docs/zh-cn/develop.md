@@ -84,3 +84,56 @@ source ~/.bashrc
 gcc -v
 ```
 
+
+
+
+## 使用vscode进行远程开发
+
+## 以R语言为例
+
+### 1.VScode <u>[下载](https://code.visualstudio.com/)</u>，vscode是微软开源的一款开发用软件，下载好之后直接安装就好。
+
+### 2.Remote-SSH插件安装，安装好之后左侧会有一个远程资源管理器，电脑屏幕的图标(下图第三步)。
+
+![remote-ssh](../zh-cn/picture/longrui/develop/remote-ssh.png)
+
+### 3.R语言插件安装
+![R](../zh-cn/picture/longrui/develop/R.png)
+### 4.添加远程服务器，使用ssh命令进入服务器就行了 ，比如：ssh rlong@122.205.95.XXX，回车，主机地址就会被添加到左边的SSH TARGETS中
+
+![img](file:///C:\Users\longrui\AppData\Roaming\Tencent\Users\942121483\QQ\WinTemp\RichOle\~@[@]JHLH55NDI2EP2YOK1Q.png)
+
+### 5.右键服务地址，根据提示选择一个(我建议打开一个新窗口)，然后选择远程主机的操作系统，输入密码就进入连上远程服务了。右下角有显示
+![os](../zh-cn/picture/longrui/develop/os.png)
+![pass](../zh-cn/picture/longrui/develop/pass.png)
+![img](file:///C:\Users\longrui\AppData\Roaming\Tencent\Users\942121483\QQ\WinTemp\RichOle\B{NZRPVQ4F$I8GN}CNNO1`5.png)
+
+步骤从左到右
+
+![remote](../zh-cn/picture/longrui/develop/remote.png)
+![io](../zh-cn/picture/longrui/develop/io.png)
+
+这时候我们已经连接到了linux服务，可以畅快的遨游了。
+
+我们在写R代码之前，先在远程服务安装一个[R包](https://github.com/REditorSupport/vscode-R/wiki/R-Language-Service)，注意我们R的版本必须在3.4以上
+
+我们先新建一个文件，然后在终端进入R环境，输入
+
+```R
+install.packages("languageserver")
+```
+
+![console](../zh-cn/picture/longrui/develop/console.png)
+或者自己在服务器下载
+
+到这里基本就大功告成了。
+
+我们看一下效果
+
+（绘图）
+
+![img](file:///C:\Users\longrui\AppData\Roaming\Tencent\Users\942121483\QQ\WinTemp\RichOle\L}6AKG2~MAD`XQCCUHRM2F9.png)
+
+（查看数据）
+
+但是，还有个小小的问题，现在每次打开都要输入密码，很麻烦。解决也很简单，把自己的公钥给服务器就行了。可自行百度，这个不是我们讨论的重点
