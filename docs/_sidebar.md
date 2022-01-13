@@ -8,6 +8,7 @@
 * [张杭](zh-cn/zh.md)
 * [周芷菡](zh-cn/zzh.md)
 * [龙锐](zh-cn/lr.md)
+* [开发](zh-cn/develop.md)
 
 
 
