@@ -132,7 +132,7 @@ install.packages("languageserver")
 
 （绘图）
 
-![img](file:///C:\Users\longrui\AppData\Roaming\Tencent\Users\942121483\QQ\WinTemp\RichOle\L}6AKG2~MAD`XQCCUHRM2F9.png)
+
 
 （查看数据）
 ![image-20220111194251477](../zh-cn/picture/longrui/develop/data.png)
