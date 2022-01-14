@@ -16,6 +16,17 @@
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
   <script>
+      const gitalk = new Gitalk({
+      clientID: 'Github Application Client ID',
+      clientSecret: 'Github Application Client Secret',
+      repo: 'Github repo',
+      owner: 'Github repo owner',
+      admin: ['Github repo collaborators, only these guys can initialize github issues'],
+      // facebook-like distraction free mode
+      distractionFreeMode: false
+  })
+  </script>
+  <script>
 
     window.$docsify = {
       loadSidebar:true,
@@ -51,21 +62,9 @@
 
       },
     };
-    
-    
-    
+
   </script>
-  <script>
-    const gitalk = new Gitalk({
-      clientID: '52db0f0abae07c0fe282',
-      clientSecret: '4bd7d0767290d29ff390978ae1404925021a533a',
-      repo: 'NatureGate.github.io',
-      owner: 'NatureGate',
-      admin: ['NatureGate'],
-      // facebook-like distraction free mode
-      distractionFreeMode: false
-    });
-  </script>
+  
   <!-- Docsify v4 -->
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   <!--Java代码高亮-->
