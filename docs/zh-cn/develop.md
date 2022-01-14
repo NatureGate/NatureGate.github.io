@@ -132,8 +132,6 @@ install.packages("languageserver")
 
 （绘图）
 
-
-
 （查看数据）
 ![image-20220111194251477](../zh-cn/picture/longrui/develop/data.png)
 
